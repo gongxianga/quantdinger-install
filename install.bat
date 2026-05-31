@@ -1,6 +1,12 @@
 @echo off
 setlocal enabledelayedexpansion
 
+:: Keep window open on any unexpected error
+if "%1"=="RUN" goto :main
+cmd /k "%~f0" RUN
+exit /b
+
+:main
 echo ============================================
 echo   QuantDinger One-Click Installer
 echo ============================================

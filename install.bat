@@ -72,11 +72,11 @@ echo [OK] 虚拟环境创建完成
 :: 安装依赖
 echo [5/6] 安装依赖包（可能需要几分钟）...
 call venv\Scripts\activate.bat
-pip install --upgrade pip -q
+venv\Scripts\python.exe -m pip install --upgrade pip -q
 if exist "requirements.txt" (
-    pip install -r requirements.txt -q
+    venv\Scripts\python.exe -m pip install -r requirements.txt -q
 ) else (
-    pip install pandas numpy ccxt ta-lib backtrader -q
+    venv\Scripts\python.exe -m pip install pandas numpy ccxt ta-lib backtrader -q
 )
 if %errorLevel% neq 0 (
     echo [错误] 安装依赖失败，请检查网络连接

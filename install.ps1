@@ -99,11 +99,12 @@ Write-Step 5 $TOTAL_STEPS "安装依赖包（可能需要几分钟）..."
 $pip = Join-Path $venvPath "Scripts\pip.exe"
 $reqFile = Join-Path $installDir "requirements.txt"
 
-& $pip install --upgrade pip -q
+$python = Join-Path $venvPath "Scripts\python.exe"
+& $python -m pip install --upgrade pip -q
 if (Test-Path $reqFile) {
-    & $pip install -r $reqFile -q
+    & $python -m pip install -r $reqFile -q
 } else {
-    & $pip install pandas numpy ccxt backtrader -q
+    & $python -m pip install pandas numpy ccxt backtrader -q
 }
 if ($LASTEXITCODE -ne 0) {
     Write-Fail "依赖安装失败"

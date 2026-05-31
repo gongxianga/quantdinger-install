@@ -5,20 +5,20 @@ echo [1/4] Stopping QuantDinger...
 cd /d "%~dp0QuantDinger"
 docker compose -f docker-compose.ghcr.yml down
 
-echo [2/4] Removing bad .env directory...
-if exist ".env\" (
-    rmdir /s /q ".env"
+echo [2/4] Removing bad backend.env directory...
+if exist "backend.env\" (
+    rmdir /s /q "backend.env"
 )
-if exist ".env" (
-    del /f /q ".env"
+if exist "backend.env" (
+    del /f /q "backend.env"
 )
 
-echo [3/4] Creating .env from template...
+echo [3/4] Creating backend.env from template...
 if exist "backend_api_python\env.example" (
-    copy /y "backend_api_python\env.example" ".env" >nul
-    echo [OK] .env created.
+    copy /y "backend_api_python\env.example" "backend.env" >nul
+    echo [OK] backend.env created.
 ) else (
-    echo [ERROR] env.example not found. Please check the QuantDinger directory.
+    echo [ERROR] env.example not found.
     pause
     exit /b 1
 )

@@ -117,6 +117,13 @@ echo [OK] Source ready.
 :: ===== Step 4: Start services =====
 echo [4/4] Starting QuantDinger (first run may take a few minutes)...
 cd QuantDinger
+
+:: Create backend.env before Docker starts (prevents Docker creating it as a directory)
+if exist "backend.env\" rmdir /s /q "backend.env"
+if not exist "backend.env" (
+    copy /y "backend_api_python\env.example" "backend.env" >nul
+    echo [OK] backend.env created.
+)
 docker compose -f docker-compose.ghcr.yml pull
 docker compose -f docker-compose.ghcr.yml up -d
 if %errorLevel% neq 0 (
